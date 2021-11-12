@@ -25,6 +25,7 @@ function nextSequence() {
 
 //-------Step 3 - Show the Sequence to the User with Animations and Sounds
 //1. Use jQuery to select the button with the same id as the randomChosenColour
+//3. Use Google/Stackoverflow to figure out how you can use Javascript to play the sound for the button colour selected in step 1.
 function selectBtn(randomChosenColour) {
   if(randomChosenColour === "yellow"){
     $("#yellow").fadeOut(100).fadeIn(100);
