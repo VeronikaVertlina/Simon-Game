@@ -59,9 +59,7 @@ function animatePress(currentColour) {
 }
 
 
-keypress(function(event){
-  nextSequence();
-});
+nextSequence();
 
 
 
