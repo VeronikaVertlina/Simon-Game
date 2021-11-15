@@ -10,14 +10,13 @@ var userClickedPattern = [];
 //--> So if the Green button was clicked, userChosenColour will equal its id which is "green".
 $('.btn').click(function() {
 
-  var userChosenColour = this.id; // var userChosenColour = $(this).attr("id");
+  var userChosenColour = $(this).attr("id"); // var userChosenColour = this.id;
   userClickedPattern.push(userChosenColour);
 
   playSound(userChosenColour);
   // console.log(userClickedPattern);
+  animatePress(userChosenColour);
 });
-
-
 
 
 function nextSequence() {
@@ -33,7 +32,6 @@ function nextSequence() {
   //4. Refactor the code in playSound() so that it will work for both playing sound
   //in nextSequence() and when the user clicks a button.
   playSound(randomChosenColour);
-
 }
 
 //2. Create a new function called playSound() that takes a single input parameter called name.
@@ -45,8 +43,27 @@ function playSound(name) {
   audio.play();
 }
 
+//1. Create a new function called animatePress(), it should take a single input parameter called currentColour.
+function animatePress(currentColour) {
 
-nextSequence();
+  //2. Take a look inside the styles.css file, you can see there is a class called "pressed",
+  //it will add a box shadow and changes the background colour to grey
+  //3. Use jQuery to add this pressed class to the button that gets clicked inside animatePress().
+    var activeButton = $("#" + currentColour);
+    activeButton.addClass("pressed");
+
+    //4. use Javascript to remove the pressed class after a 100 milliseconds.
+    setTimeout(function () {
+      activeButton.removeClass("pressed")
+    }, 100);
+}
+
+
+keypress(function(event){
+  nextSequence();
+});
+
+
 
 
 
