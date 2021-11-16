@@ -2,17 +2,30 @@
 var buttonColours = ["red", "blue", "green", "yellow"];
 
 var gamePattern = [];
-
 var userClickedPattern = [];
+
+var level = 0;
+var start = false;
+
+//1. Use jQuery to detect when a keyboard key has been pressed,
+//when that happens for the first time, call nextSequence().
+$(document).keypress(function(){
+  // alert("A key was pressed");
+    if(!start){
+    //3. The h1 title starts out saying "Press A Key to Start",
+    //when the game has started, change this to say "Level 0".
+    $("#level-title").text("Level " + level);
+    nextSequence();
+    start = true;
+  }
+});
 
 //1. Use jQuery to detect when any of the buttons are clicked and trigger a handler function.
 //2. Inside the handler, create a new variable called userChosenColour to store the id of the button that got clicked.
 //--> So if the Green button was clicked, userChosenColour will equal its id which is "green".
 $('.btn').click(function() {
-
   var userChosenColour = $(this).attr("id"); // var userChosenColour = this.id;
   userClickedPattern.push(userChosenColour);
-
   playSound(userChosenColour);
   // console.log(userClickedPattern);
   animatePress(userChosenColour);
@@ -20,16 +33,16 @@ $('.btn').click(function() {
 
 
 function nextSequence() {
+  //4. Inside nextSequence(), increase the level by 1 every time nextSequence() is called.
+  level++;
+
+  //5. Inside nextSequence(), update the h1 with this change in the value of level.
+  $("#level-title").text("Level " + level);
+
 
   var randomNumber = Math.floor(Math.random() * 4);
   var randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
-  var level = 0;
-  level += 1;
-
-  //3. The h1 title starts out saying "Press A Key to Start",
-  //when the game has started, change this to say "Level 0".
-  $("h1").text("Level " + level);
 
   //1. Use jQuery to select the button with the same id as the randomChosenColour
   //2. Use Google/Stackoverflow to figure out how you can use jQuery to animate a flash to the button selected in step 1.
@@ -38,10 +51,6 @@ function nextSequence() {
   //4. Refactor the code in playSound() so that it will work for both playing sound
   //in nextSequence() and when the user clicks a button.
   playSound(randomChosenColour);
-
-  //4. Inside nextSequence(), increase the level by 1 every time nextSequence() is called.
-
-
 }
 
 //2. Create a new function called playSound() that takes a single input parameter called name.
@@ -67,22 +76,6 @@ function animatePress(currentColour) {
       activeButton.removeClass("pressed")
     }, 100);
 }
-
-//1. Use jQuery to detect when a keyboard key has been pressed,
-//when that happens for the first time, call nextSequence().
-//You'll need a way to keep track of whether if the game has started or not,
-//so you only call nextSequence() on the first keypress.
-
-$(document).keypress(function(event){
-  // alert("A key was pressed");
-  nextSequence();
-});
-
-
-
-
-
-
 
 
 
