@@ -10,10 +10,10 @@ var started = false;
 
 //1. Use jQuery to detect when a keyboard key has been pressed, when that happens for the first time, call nextSequence().
 $(document).on("keypress", function(){
-  nextSequence();
   if(!started){
     //3. The h1 title starts out saying "Press A Key to Start", when the game has started, change this to say "Level 0".
     $("#level-title").text("Level " + level);
+    nextSequence();
     started = true;
   }
 });
@@ -26,9 +26,11 @@ $(".btn").click(function(){
   // alert("Was clicked " + userChosenColour);
   playSound(userChosenColour);
   //4. Add the contents of the variable userChosenColour created in step 2 to the end of this new userClickedPattern
-  userClickedPattern.push(userChosenColour);
+  console.log(userClickedPattern.push(userChosenColour));
   // console.log("userClickedPattern is " + userClickedPattern);
   animatePress(userChosenColour);
+  //Call checkAnswer() after a user has clicked and chosen their answer, passing in the index of the last answer in the user's sequence.
+  checkAnswer(level);
 });
 
 
@@ -47,7 +49,7 @@ function nextSequence() {
   // console.log("gamePattern is " + gamePattern);
   playSound(randomChosenColour);
   //6. Add the new randomChosenColour generated in step 4 to the end of the gamePattern.
-  gamePattern.push(randomChosenColour);
+  console.log(gamePattern.push(randomChosenColour));
 }
 
 //2. Create a new function called playSound() that takes a single input parameter called name.
@@ -68,8 +70,20 @@ function animatePress(currentColour){
   }, 100);
 }
 
-
-
+//1. Create a new function called checkAnswer(), it should take one input with the name currentLevel
+function checkAnswer(currentLevel) {
+  //If the user has pressed red, green, red, yellow, the index of the last answer is 3.
+  //3. Write an if statement inside checkAnswer() to check if the most recent user answer is the same as the game pattern. If so then log "success", otherwise log "wrong".
+  //You can now use these log statements along with logging the values of userClickedPattern and gamePattern in the Chrome Developer Tools console to check whether if your code is performing as you would expect and debug your code as needed. Once you're done, feel free to remove these log statements.
+  if (userClickedPattern === gamePattern){
+    console.log("success");
+    currentLevel++;
+    nextSequence();
+  }
+  else (
+    console.log("worth")
+  )
+}
 
 
 
