@@ -1,4 +1,72 @@
 
+var buttonColours = ["red", "blue", "green", "yellow"];
+//5. At the top of the game.js file, create a new empty array called gamePattern.
+var gamePattern = [];
+//3. At the top of the game.js file, create a new empty array with the name userClickedPattern.
+var userClickedPattern = [];
+//2. Create a new variable called level and start at level 0.
+var level = 0;
+var started = false;
+
+//1. Use jQuery to detect when a keyboard key has been pressed, when that happens for the first time, call nextSequence().
+$(document).on("keypress", function(){
+  nextSequence();
+  if(!started){
+    //3. The h1 title starts out saying "Press A Key to Start", when the game has started, change this to say "Level 0".
+    $("#level-title").text("Level " + level);
+    started = true;
+  }
+});
+
+
+//3. Use Google/Stackoverflow to figure out how you can use Javascript to play the sound for the button colour selected in step 1.
+$(".btn").click(function(){
+  //2. Inside the handler, create a new variable called userChosenColour to store the id of the button that got clicked.
+  var userChosenColour = $(this).attr("id");
+  // alert("Was clicked " + userChosenColour);
+  playSound(userChosenColour);
+  //4. Add the contents of the variable userChosenColour created in step 2 to the end of this new userClickedPattern
+  userClickedPattern.push(userChosenColour);
+  // console.log("userClickedPattern is " + userClickedPattern);
+  animatePress(userChosenColour);
+});
+
+
+//Step 1. Inside game.js create a new function called nextSequence()
+function nextSequence() {
+  //4. Inside nextSequence(), increase the level by 1 every time nextSequence() is called.
+  level++;
+  //5. Inside nextSequence(), update the h1 with this change in the value of level.
+  $("#level-title").text("Level " + level);
+  //2. Inside the new function generate a new random number between 0 and 3, and store it in a variable called randomNumber
+  var randomNumber = Math.floor(Math.random() * 4);
+  //4. Create a new variable called randomChosenColour and use the randomNumber from step 2 to select a random colour from the buttonColours array.
+  var randomChosenColour = buttonColours[randomNumber];
+  //1. Use jQuery to select the button with the same id as the randomChosenColour
+  $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
+  // console.log("gamePattern is " + gamePattern);
+  playSound(randomChosenColour);
+  //6. Add the new randomChosenColour generated in step 4 to the end of the gamePattern.
+  gamePattern.push(randomChosenColour);
+}
+
+//2. Create a new function called playSound() that takes a single input parameter called name.
+function playSound(name) {
+  //3. Take the code we used to play sound in the nextSequence() function and move it to playSound().
+  var audio = new Audio ('sounds/' + name + '.mp3');
+  audio.play();
+}
+
+//1. Create a new function called animatePress(), it should take a single input parameter called currentColour.
+function animatePress(currentColour){
+  //2. Take a look inside the styles.css file, you can see there is a class called "pressed", it will add a box shadow and changes the background colour to grey.
+  //3. Use jQuery to add this pressed class to the button that gets clicked inside animatePress().
+  $("#" + currentColour).addClass("pressed");
+
+  setTimeout(function(){
+    $("#" + currentColour).removeClass("pressed");
+  }, 100);
+}
 
 
 
@@ -36,7 +104,9 @@
 
 
 
-// 
+
+
+//
 // var buttonColours = ["red", "blue", "green", "yellow"];
 //
 // var gamePattern = [];
