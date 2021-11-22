@@ -26,8 +26,8 @@ $(".btn").click(function(){
   // alert("Was clicked " + userChosenColour);
   playSound(userChosenColour);
   //4. Add the contents of the variable userChosenColour created in step 2 to the end of this new userClickedPattern
-  console.log(userClickedPattern.push(userChosenColour));
-  // console.log("userClickedPattern is " + userClickedPattern);
+  userClickedPattern.push(userChosenColour);
+  console.log(userClickedPattern);
   animatePress(userChosenColour);
   //Call checkAnswer() after a user has clicked and chosen their answer, passing in the index of the last answer in the user's sequence.
   checkAnswer(level);
@@ -49,7 +49,8 @@ function nextSequence() {
   // console.log("gamePattern is " + gamePattern);
   playSound(randomChosenColour);
   //6. Add the new randomChosenColour generated in step 4 to the end of the gamePattern.
-  console.log(gamePattern.push(randomChosenColour));
+  gamePattern.push(randomChosenColour);
+  console.log(gamePattern);
 }
 
 //2. Create a new function called playSound() that takes a single input parameter called name.
@@ -74,15 +75,16 @@ function animatePress(currentColour){
 function checkAnswer(currentLevel) {
   //If the user has pressed red, green, red, yellow, the index of the last answer is 3.
   //3. Write an if statement inside checkAnswer() to check if the most recent user answer is the same as the game pattern. If so then log "success", otherwise log "wrong".
-  //You can now use these log statements along with logging the values of userClickedPattern and gamePattern in the Chrome Developer Tools console to check whether if your code is performing as you would expect and debug your code as needed. Once you're done, feel free to remove these log statements.
-  if (userClickedPattern === gamePattern){
+
+  if (gamePattern.includes() === userClickedPattern.includes() && gamePattern.length === userClickedPattern.length){
     console.log("success");
+    userClickedPattern.pop();
     currentLevel++;
     nextSequence();
   }
-  else (
-    console.log("worth")
-  )
+  else {
+    console.log("worth");
+  }
 }
 
 
