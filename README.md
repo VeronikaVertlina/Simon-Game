@@ -4,4 +4,8 @@ In this challenge module we will be building a game that is modeled off the game
 
 It's going to test out your skills and what you've learned in the last module on jQuery, as well as some of the previously modules of the course 'The complete web development Bootcamp' with Angela.
 
+Start the Game
+
 <img width="588" alt="Simon Game" src="https://user-images.githubusercontent.com/54140287/141518806-e1d6fd5e-f4ec-4c87-9e0d-d7a284ecc4b2.png">
+
+<img width="588" alt="Simon Game" src="C:/Users/vertl/Desktop/png_img/2018-11-22_13-02-31-ac4fa16ac321cb9133eef978b1d1937b.png">
