@@ -5,8 +5,9 @@ var gamePattern = [];
 //3. At the top of the game.js file, create a new empty array with the name userClickedPattern.
 var userClickedPattern = [];
 //2. Create a new variable called level and start at level 0.
-var started = false;
 var level = 0;
+var started = false;
+
 
 //1. Use jQuery to detect when a keyboard key has been pressed, when that happens for the first time, call nextSequence().
 $(document).on("keypress", function(){
@@ -66,14 +67,16 @@ function checkAnswer(currentLevel) {
 
 //1. Create a new function called startOver().
 function startOver(){
+  //3. Inside this function, you'll need to reset the values of level, gamePattern and started variables.
   level = 0;
+  gamePattern = [];
   started = false;
-  gamePattern.length-1;
-}
+  }
 
 
 //Step 1. Inside game.js create a new function called nextSequence()
 function nextSequence() {
+  userClickedPattern = [];
   //4. Inside nextSequence(), increase the level by 1 every time nextSequence() is called.
   level++;
   //5. Inside nextSequence(), update the h1 with this change in the value of level.
