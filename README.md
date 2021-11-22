@@ -7,5 +7,3 @@ It's going to test out your skills and what you've learned in the last module on
 Start the Game
 
 <img width="588" alt="Simon Game" src="https://user-images.githubusercontent.com/54140287/141518806-e1d6fd5e-f4ec-4c87-9e0d-d7a284ecc4b2.png">
-
-<img width="588" alt="Simon Game1" src="Desktop/png_img/2018-11-22_13-02-31-ac4fa16ac321cb9133eef978b1d1937b.gif">
