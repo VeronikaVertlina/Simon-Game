@@ -27,10 +27,10 @@ $(".btn").click(function(){
   playSound(userChosenColour);
   //4. Add the contents of the variable userChosenColour created in step 2 to the end of this new userClickedPattern
   userClickedPattern.push(userChosenColour);
-  console.log(userClickedPattern);
+  // console.log(userClickedPattern);
   animatePress(userChosenColour);
   //Call checkAnswer() after a user has clicked and chosen their answer, passing in the index of the last answer in the user's sequence.
-  checkAnswer(level);
+  checkAnswer(userClickedPattern.length-1);
 });
 
 
@@ -76,12 +76,17 @@ function checkAnswer(currentLevel) {
   //If the user has pressed red, green, red, yellow, the index of the last answer is 3.
   //3. Write an if statement inside checkAnswer() to check if the most recent user answer is the same as the game pattern. If so then log "success", otherwise log "wrong".
 
-  if (gamePattern.includes() === userClickedPattern.includes() && gamePattern.length === userClickedPattern.length){
+  if (gamePattern[currentLevel] === userClickedPattern[currentLevel]){
     console.log("success");
-    userClickedPattern.pop();
-    currentLevel++;
-    nextSequence();
-  }
+    //4. If the user got the most recent answer right in step 3, then check that they have finished their sequence with another if statement.
+     if (userClickedPattern.length === gamePattern.length){
+
+       //5. Call nextSequence() after a 1000 millisecond delay.
+       setTimeout(function () {
+         nextSequence();
+       }, 1000);
+     }
+   }
   else {
     console.log("worth");
   }
