@@ -5,8 +5,8 @@ var gamePattern = [];
 //3. At the top of the game.js file, create a new empty array with the name userClickedPattern.
 var userClickedPattern = [];
 //2. Create a new variable called level and start at level 0.
-var level = 0;
 var started = false;
+var level = 0;
 
 //1. Use jQuery to detect when a keyboard key has been pressed, when that happens for the first time, call nextSequence().
 $(document).on("keypress", function(){
@@ -33,6 +33,44 @@ $(".btn").click(function(){
   checkAnswer(userClickedPattern.length-1);
 });
 
+//1. Create a new function called checkAnswer(), it should take one input with the name currentLevel
+function checkAnswer(currentLevel) {
+  //If the user has pressed red, green, red, yellow, the index of the last answer is 3.
+  //3. Write an if statement inside checkAnswer() to check if the most recent user answer is the same as the game pattern. If so then log "success", otherwise log "wrong".
+  if (gamePattern[currentLevel] === userClickedPattern[currentLevel]){
+    console.log("success");
+    //4. If the user got the most recent answer right in step 3, then check that they have finished their sequence with another if statement.
+     if (userClickedPattern.length === gamePattern.length){
+       //5. Call nextSequence() after a 1000 millisecond delay.
+       setTimeout(function () {
+         nextSequence();
+       }, 1000);
+     }
+   }
+  else {
+    console.log("worth");
+    //1. In the sounds folder, there is a sound called wrong.mp3, play this sound if the user got one of the answers wrong.
+    var wrongSound = new Audio('sounds/wrong.mp3');
+    wrongSound.play();
+     //2. In the styles.css file, there is a class called "game-over", apply this class to the body of the website when the user gets one of the answers wrong and then remove it after 200 milliseconds.
+    $('body').addClass('game-over');
+    setTimeout(function(){
+      $('body').removeClass('game-over');
+    }, 200);
+     //3. Change the h1 title to say "Game Over, Press Any Key to Restart" if the user got the answer wrong.
+    $('#level-title').text('Game Over, Press Any Key to Restart');
+    //2. Call startOver() if the user gets the sequence wrong.
+    startOver();
+  }
+}
+
+//1. Create a new function called startOver().
+function startOver(){
+  level = 0;
+  started = false;
+  gamePattern.length-1;
+}
+
 
 //Step 1. Inside game.js create a new function called nextSequence()
 function nextSequence() {
@@ -58,6 +96,7 @@ function playSound(name) {
   //3. Take the code we used to play sound in the nextSequence() function and move it to playSound().
   var audio = new Audio ('sounds/' + name + '.mp3');
   audio.play();
+
 }
 
 //1. Create a new function called animatePress(), it should take a single input parameter called currentColour.
@@ -71,26 +110,7 @@ function animatePress(currentColour){
   }, 100);
 }
 
-//1. Create a new function called checkAnswer(), it should take one input with the name currentLevel
-function checkAnswer(currentLevel) {
-  //If the user has pressed red, green, red, yellow, the index of the last answer is 3.
-  //3. Write an if statement inside checkAnswer() to check if the most recent user answer is the same as the game pattern. If so then log "success", otherwise log "wrong".
 
-  if (gamePattern[currentLevel] === userClickedPattern[currentLevel]){
-    console.log("success");
-    //4. If the user got the most recent answer right in step 3, then check that they have finished their sequence with another if statement.
-     if (userClickedPattern.length === gamePattern.length){
-
-       //5. Call nextSequence() after a 1000 millisecond delay.
-       setTimeout(function () {
-         nextSequence();
-       }, 1000);
-     }
-   }
-  else {
-    console.log("worth");
-  }
-}
 
 
 
